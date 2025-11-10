@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>স্বাস্থ্য কর্মী এসোসিয়েশন</title>
+    <title>বাংলাদেশ নার্সেস এসোসিয়েশন (বিএনএ), ময়মনসিংহ</title>
     <link href="https://fonts.maateen.me/hind-siliguri/font.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -14,10 +14,38 @@
             font-family: 'Hind Siliguri', sans-serif;
         }
 
+        :root {
+            --primary: #1e88e5;
+            --primary-dark: #0d47a1;
+            --secondary: #43a047;
+            --secondary-dark: #2e7d32;
+            --accent: #ff9800;
+            --danger: #d32f2f;
+            --light: #f5f7fa;
+            --dark: #333;
+            --gray: #666;
+        }
+
         body {
-            background-color: #f5f7fa;
-            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark);
             line-height: 1.6;
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+
+        .pattern-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 2px, transparent 0),
+                radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 2px, transparent 0);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -1;
         }
 
         .container {
@@ -28,10 +56,12 @@
 
         /* হেডার স্টাইল */
         header {
-            background: linear-gradient(135deg, #1e88e5, #0d47a1);
-            color: white;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--dark);
             padding: 1rem 0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         nav {
@@ -46,11 +76,20 @@
             gap: 10px;
             font-size: 1.8rem;
             font-weight: bold;
+            color: var(--primary);
         }
 
         .logo-icon {
             font-size: 2rem;
-            color: #4caf50;
+            color: var(--secondary);
+        }
+
+        .logo-link {
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .nav-buttons {
@@ -61,85 +100,182 @@
         .btn {
             padding: 10px 20px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
             transition: all 0.3s ease;
             font-family: 'Hind Siliguri', sans-serif;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .member-btn {
-            background-color: #43a047;
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
             color: white;
         }
 
         .member-btn:hover {
-            background-color: #2e7d32;
             transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
         .members-btn {
-            background-color: #ff9800;
+            background: linear-gradient(135deg, var(--accent), #ef6c00);
             color: white;
         }
 
         .members-btn:hover {
-            background-color: #ef6c00;
             transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
         .admin-login-btn {
-            background-color: transparent;
-            color: white;
-            border: 1px solid white;
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
         }
 
         .admin-login-btn:hover {
-            background-color: white;
-            color: #1e88e5;
+            background: var(--primary);
+            color: white;
         }
 
         .admin-btn {
-            background-color: #d32f2f;
+            background: linear-gradient(135deg, #d32f2f, #b71c1c);
             color: white;
             display: none;
         }
 
         .admin-btn:hover {
-            background-color: #b71c1c;
             transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
         .logout-btn {
-            background-color: #757575;
+            background: var(--gray);
             color: white;
             display: none;
         }
 
         .logout-btn:hover {
-            background-color: #616161;
+            background: #616161;
+            transform: translateY(-2px);
+        }
+
+        /* মেইন কন্টেন্ট */
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 2rem auto;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         /* হিরো সেকশন */
         .hero {
             text-align: center;
-            padding: 4rem 0;
-            background: white;
-            margin: 2rem 0;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(30, 136, 229, 0.1), rgba(67, 160, 71, 0.1));
         }
 
         .hero h1 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            color: #1e88e5;
+            color: var(--primary);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .hero p {
             font-size: 1.2rem;
-            color: #666;
+            color: var(--gray);
             margin-bottom: 2rem;
+        }
+
+        /* মেম্বারস পেজ */
+        .members-page, .admin-page {
+            display: none;
+            padding: 2rem;
+        }
+
+        .page-title {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .search-container {
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-container input {
+            flex: 1;
+            font-family: 'Hind Siliguri', sans-serif;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .search-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0 1.5rem;
+            cursor: pointer;
+            font-family: 'Hind Siliguri', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* টেবিল স্টাইল */
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        .data-table th, .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .data-table th {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+
+        .data-table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .data-table tr:nth-child(even) {
+            background-color: #f5f5f5;
+        }
+
+        .data-table tr:nth-child(even):hover {
+            background-color: #f0f0f0;
         }
 
         /* মডাল স্টাইল */
@@ -164,13 +300,14 @@
             background-color: white;
             margin: 2% auto;
             padding: 2rem;
-            border-radius: 10px;
+            border-radius: 15px;
             width: 90%;
-            max-width: 700px;
+            max-width: 800px;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
             animation: slideDown 0.3s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         @keyframes slideDown {
@@ -185,10 +322,11 @@
             font-size: 2rem;
             cursor: pointer;
             color: #999;
+            transition: color 0.3s;
         }
 
         .close:hover {
-            color: #333;
+            color: var(--dark);
         }
 
         /* ফর্ম স্টাইল */
@@ -200,14 +338,14 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: bold;
-            color: #555;
+            color: var(--dark);
         }
 
         input, select, textarea {
             width: 100%;
-            padding: 0.75rem;
+            padding: 12px;
             border: 2px solid #ddd;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 1rem;
             transition: border-color 0.3s ease;
             font-family: 'Hind Siliguri', sans-serif;
@@ -215,7 +353,8 @@
 
         input:focus, select:focus, textarea:focus {
             outline: none;
-            border-color: #1e88e5;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.1);
         }
 
         .form-row {
@@ -231,8 +370,9 @@
             margin-bottom: 1rem;
             padding: 1rem;
             background-color: #f9f9f9;
-            border-radius: 5px;
+            border-radius: 8px;
             position: relative;
+            border: 1px solid #eee;
         }
 
         .remove-education {
@@ -247,134 +387,100 @@
             height: 25px;
             cursor: pointer;
             font-size: 0.8rem;
+            transition: all 0.3s;
+        }
+
+        .remove-education:hover {
+            background: #d32f2f;
+            transform: scale(1.1);
         }
 
         .add-education {
             background-color: #e3f2fd;
-            color: #1e88e5;
-            border: 1px dashed #1e88e5;
+            color: var(--primary);
+            border: 1px dashed var(--primary);
             padding: 0.5rem 1rem;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             margin-bottom: 1rem;
             display: inline-block;
             font-family: 'Hind Siliguri', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .add-education:hover {
+            background-color: #bbdefb;
+        }
+
+        .image-upload {
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .image-upload:hover {
+            border-color: var(--primary);
+        }
+
+        .image-upload label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .image-upload i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .image-preview {
+            max-width: 200px;
+            max-height: 200px;
+            margin-top: 1rem;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .payment-info {
+            background: #e8f5e9;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .payment-info h3 {
+            color: var(--secondary-dark);
+            margin-bottom: 0.5rem;
         }
 
         .submit-btn {
             width: 100%;
             padding: 1rem;
-            background: linear-gradient(135deg, #43a047, #2e7d32);
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: 'Hind Siliguri', sans-serif;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        /* মেম্বারস পেজ */
-        .members-page, .admin-page {
-            display: none;
-            padding: 2rem 0;
-        }
-
-        .page-title {
-            margin-bottom: 1.5rem;
-            color: #1e88e5;
-            border-bottom: 2px solid #1e88e5;
-            padding-bottom: 0.5rem;
-        }
-
-        .search-container {
-            margin-bottom: 2rem;
-            display: flex;
-            gap: 10px;
-        }
-
-        .search-container input {
-            flex: 1;
-            font-family: 'Hind Siliguri', sans-serif;
-        }
-
-        .search-btn {
-            background-color: #1e88e5;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 0 1.5rem;
-            cursor: pointer;
-            font-family: 'Hind Siliguri', sans-serif;
-        }
-
-        .members-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .member-card {
-            background: white;
-            border-radius: 10px;
-            padding: 1.5rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .member-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .member-name {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #1e88e5;
-            margin-bottom: 0.5rem;
-        }
-
-        .member-detail {
-            margin-bottom: 0.5rem;
-            color: #555;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
         /* এডমিন টেবিল */
-        .admin-table {
-            width: 100%;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            margin-bottom: 2rem;
-        }
-
-        .admin-table table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .admin-table th, .admin-table td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-        }
-
-        .admin-table th {
-            background-color: #1e88e5;
-            color: white;
-            font-weight: bold;
-        }
-
-        .admin-table tr:hover {
-            background-color: #f5f5f5;
-        }
-
         .action-btn {
             padding: 0.5rem 1rem;
             border: none;
@@ -382,6 +488,7 @@
             cursor: pointer;
             font-size: 0.9rem;
             margin-right: 0.5rem;
+            transition: all 0.3s;
         }
 
         .approve-btn {
@@ -389,14 +496,35 @@
             color: white;
         }
 
+        .approve-btn:hover {
+            background-color: #388e3c;
+        }
+
         .reject-btn {
             background-color: #f44336;
             color: white;
         }
 
+        .reject-btn:hover {
+            background-color: #d32f2f;
+        }
+
         .view-btn {
             background-color: #2196f3;
             color: white;
+        }
+
+        .view-btn:hover {
+            background-color: #1976d2;
+        }
+
+        .delete-btn {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background-color: #b71c1c;
         }
 
         .status-pending {
@@ -427,7 +555,7 @@
 
         .login-icon {
             font-size: 3rem;
-            color: #1e88e5;
+            color: var(--primary);
             margin-bottom: 1rem;
         }
 
@@ -447,26 +575,32 @@
             background-color: white;
             margin: 20% auto;
             padding: 2rem;
-            border-radius: 10px;
+            border-radius: 15px;
             width: 90%;
             max-width: 400px;
             text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .success-content h3 {
-            color: #43a047;
+            color: var(--secondary);
             margin-bottom: 1rem;
         }
 
         .ok-btn {
             padding: 0.75rem 2rem;
-            background-color: #1e88e5;
+            background-color: var(--primary);
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             margin-top: 1rem;
             font-family: 'Hind Siliguri', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .ok-btn:hover {
+            background-color: var(--primary-dark);
         }
 
         /* রেসপনসিভ ডিজাইন */
@@ -495,20 +629,56 @@
                 font-size: 2rem;
             }
             
-            .admin-table {
-                overflow-x: auto;
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .modal-content {
+                margin: 5% auto;
+                width: 95%;
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .main-content {
+                margin: 1rem auto;
+            }
+            
+            .hero {
+                padding: 2rem 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .data-table {
+                font-size: 0.9rem;
+            }
+            
+            .data-table th, .data-table td {
+                padding: 0.75rem 0.5rem;
             }
         }
     </style>
 </head>
 <body>
+    <div class="pattern-overlay"></div>
+
     <!-- হেডার সেকশন -->
     <header>
         <div class="container">
             <nav>
                 <div class="logo">
-                    <i class="fas fa-hand-holding-medical logo-icon"></i>
-                    <span> বাংলাদেশ নার্সেস এসোসিয়েশন (বিএনএ), ময়মনসিংহ </span>
+                    <a href="https://ik.imagekit.io/nasirbam/bna_logo.png?updatedAt=1751567035734" class="logo-link" id="logoLink">
+                        <i class="fas fa-hand-holding-medical logo-icon"></i>
+                        <span>বাংলাদেশ নার্সেস এসোসিয়েশন (বিএনএ), ময়মনসিংহ</span>
+                    </a>
                 </div>
                 <div class="nav-buttons">
                     <button class="btn member-btn" id="memberBtn">সদস্য হোন</button>
@@ -523,68 +693,86 @@
 
     <!-- মেইন কন্টেন্ট -->
     <main class="container">
-        <section class="hero" id="homePage">
-            <h1>বিএনএ ময়মনসিংহ জেলা শাখার সদস্যদের স্বাগতম</h1>
-            <p> নার্সিং পেশার উন্নয়নে আমরা বদ্ধ পরিকর </p>
-            <button class="btn member-btn" id="ctaMemberBtn">সদস্য হোন</button>
-        </section>
+        <div class="main-content">
+            <!-- হোম পেজ -->
+            <section class="hero" id="homePage">
+                <h1>বিএনএ ময়মনসিংহ জেলা শাখার সম্মানীত সদস্যদের স্বাগতম</h1>
+                <p>নার্সদের অধিকার আদায়ে আমরা বদ্ধপরিকর</p>
+                <p>শুধুমাত্র ময়মনসিংহ জেলার রেজিস্ট্রার্ড নার্সগণই এখানে মেম্বার হতে পারবেন</p>
+                <button class="btn member-btn" id="ctaMemberBtn">সদস্য হোন</button>
+            </section>
 
-        <!-- মেম্বারস পেজ -->
-        <section class="members-page" id="membersPage">
-            <h2 class="page-title">আমাদের সদস্যবৃন্দ</h2>
-            
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="নাম, মোবাইল নম্বর, বিএনএমসি রেজি নম্বর বা ইমেইল দ্বারা খুঁজুন">
-                <button class="search-btn" id="searchBtn">খুঁজুন</button>
-            </div>
-            
-            <div class="members-grid" id="membersGrid">
-                <!-- মেম্বার কার্ডগুলি এখানে লোড হবে -->
-            </div>
-        </section>
+            <!-- মেম্বারস পেজ -->
+            <section class="members-page" id="membersPage">
+                <h2 class="page-title">আমাদের সদস্যবৃন্দ</h2>
+                
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="নাম, মোবাইল নম্বর, বিএনএমসি রেজি নম্বর বা ইমেইল দ্বারা খুঁজুন">
+                    <button class="search-btn" id="searchBtn">খুঁজুন</button>
+                </div>
+                
+                <div class="table-container">
+                    <table class="data-table" id="membersTable">
+                        <thead>
+                            <tr>
+                                <th>নাম</th>
+                                <th>পিতার নাম</th>
+                                <th>কর্মস্থল</th>
+                                <th>মোবাইল</th>
+                                <th>বিএনএমসি নম্বর</th>
+                            </tr>
+                        </thead>
+                        <tbody id="membersTableBody">
+                            <!-- মেম্বার তথ্য এখানে লোড হবে -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
 
-        <!-- এডমিন পেজ -->
-        <section class="admin-page" id="adminPage">
-            <h2 class="page-title">এডমিন প্যানেল - পেন্ডিং রেজিস্ট্রেশন</h2>
-            
-            <div class="admin-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>নাম</th>
-                            <th>মোবাইল</th>
-                            <th>বিএনএমসি নম্বর</th>
-                            <th>কর্মস্থল</th>
-                            <th>স্ট্যাটাস</th>
-                            <th>কার্যক্রম</th>
-                        </tr>
-                    </thead>
-                    <tbody id="adminTableBody">
-                        <!-- পেন্ডিং রেজিস্ট্রেশনগুলি এখানে লোড হবে -->
-                    </tbody>
-                </table>
-            </div>
+            <!-- এডমিন পেজ -->
+            <section class="admin-page" id="adminPage">
+                <h2 class="page-title">এডমিন প্যানেল - পেন্ডিং রেজিস্ট্রেশন</h2>
+                
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>নাম</th>
+                                <th>মোবাইল</th>
+                                <th>বিএনএমসি নম্বর</th>
+                                <th>কর্মস্থল</th>
+                                <th>স্ট্যাটাস</th>
+                                <th>কার্যক্রম</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminTableBody">
+                            <!-- পেন্ডিং রেজিস্ট্রেশনগুলি এখানে লোড হবে -->
+                        </tbody>
+                    </table>
+                </div>
 
-            <h2 class="page-title">এপ্রুভড মেম্বার</h2>
-            
-            <div class="admin-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>নাম</th>
-                            <th>মোবাইল</th>
-                            <th>বিএনএমসি নম্বর</th>
-                            <th>কর্মস্থল</th>
-                            <th>স্ট্যাটাস</th>
-                            <th>এপ্রুভ তারিখ</th>
-                        </tr>
-                    </thead>
-                    <tbody id="approvedTableBody">
-                        <!-- এপ্রুভড মেম্বারগুলি এখানে লোড হবে -->
-                    </tbody>
-                </table>
-            </div>
-        </section>
+                <h2 class="page-title">এপ্রুভড মেম্বার</h2>
+                
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>নাম</th>
+                                <th>মোবাইল</th>
+                                <th>বিএনএমসি নম্বর</th>
+                                <th>কর্মস্থল</th>
+                                <th>ইমেইল</th>
+                                <th>এপ্রুভ তারিখ</th>
+                                <th>কার্যক্রম</th>
+                            </tr>
+                        </thead>
+                        <tbody id="approvedTableBody">
+                            <!-- এপ্রুভড মেম্বারগুলি এখানে লোড হবে -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
     </main>
 
     <!-- রেজিস্ট্রেশন মডাল -->
@@ -617,8 +805,8 @@
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="email">ইমেইল এড্রেস</label>
-                        <input type="email" id="email" name="email">
+                        <label for="email">ইমেইল এড্রেস *</label>
+                        <input type="email" id="email" name="email" required>
                     </div>
                     <div class="form-group">
                         <label for="bnmc">বিএনএমসি রেজি নম্বর *</label>
@@ -634,6 +822,30 @@
                 <div class="form-group">
                     <label for="workplace">কর্মস্থল *</label>
                     <input type="text" id="workplace" name="workplace" required>
+                </div>
+
+                <div class="form-group">
+                    <label>প্রোফাইল ছবি (৪০০x৪০০ পিক্সেল, ১০০KB এর কম)</label>
+                    <div class="image-upload">
+                        <label for="profileImage">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>ছবি আপলোড করুন</span>
+                            <input type="file" id="profileImage" name="profileImage" accept="image/*" style="display: none;">
+                        </label>
+                        <img id="imagePreview" class="image-preview" src="" alt="প্রিভিউ">
+                    </div>
+                </div>
+
+                <div class="payment-info">
+                    <h3>পেমেন্ট তথ্য</h3>
+                    <p>সদস্য ফি: ১০০ টাকা</p>
+                    <p>বিকাশ নম্বর: <strong>০১৭৫১৪৫৮২৮৮</strong></p>
+                    <p>টাকা পাঠানোর পর নিচে পেমেন্ট স্ক্রিনশট আপলোড করুন</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="paymentScreenshot">পেমেন্ট স্ক্রিনশট *</label>
+                    <input type="file" id="paymentScreenshot" name="paymentScreenshot" accept="image/*" required>
                 </div>
 
                 <div class="form-group">
@@ -696,6 +908,34 @@
         </div>
     </div>
 
+    <!-- ডিলিট কনফার্মেশন মডাল -->
+    <div class="modal" id="deleteModal">
+        <div class="modal-content">
+            <span class="close" id="closeDeleteModal">&times;</span>
+            <h2>মেম্বার ডিলিট করুন</h2>
+            <form id="deleteForm">
+                <div class="form-group">
+                    <label for="deleteReason">ডিলিট করার কারণ *</label>
+                    <textarea id="deleteReason" name="deleteReason" rows="4" required placeholder="ডিলিট করার কারণ বিস্তারিত লিখুন..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="notificationEmail">ইমেইল নোটিফিকেশন পাঠান</label>
+                    <input type="checkbox" id="notificationEmail" name="notificationEmail" checked>
+                    <span style="margin-left: 10px; color: var(--gray);">সদস্যকে ইমেইল নোটিফিকেশন পাঠানো হবে</span>
+                </div>
+                <div class="form-group">
+                    <p style="color: var(--danger); font-weight: bold;">
+                        ⚠️ সতর্কতা: এই একশনটি irreversible। আপনি কি নিশ্চিত?
+                    </p>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="btn delete-btn" style="flex: 1;">ডিলিট করুন</button>
+                    <button type="button" class="btn" id="cancelDelete" style="flex: 1; background: var(--gray);">বাতিল করুন</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- ডিটেইলস ভিউ মডাল -->
     <div class="modal" id="detailsModal">
         <div class="modal-content">
@@ -724,12 +964,16 @@
         const adminLoginBtn = document.getElementById('adminLoginBtn');
         const logoutBtn = document.getElementById('logoutBtn');
         const ctaMemberBtn = document.getElementById('ctaMemberBtn');
+        const logoLink = document.getElementById('logoLink');
         const registrationModal = document.getElementById('registrationModal');
         const adminLoginModal = document.getElementById('adminLoginModal');
+        const deleteModal = document.getElementById('deleteModal');
         const closeModal = document.getElementById('closeModal');
         const closeAdminLoginModal = document.getElementById('closeAdminLoginModal');
+        const closeDeleteModal = document.getElementById('closeDeleteModal');
         const registrationForm = document.getElementById('registrationForm');
         const adminLoginForm = document.getElementById('adminLoginForm');
+        const deleteForm = document.getElementById('deleteForm');
         const successMessage = document.getElementById('successMessage');
         const okBtn = document.getElementById('okBtn');
         const homePage = document.getElementById('homePage');
@@ -737,7 +981,7 @@
         const adminPage = document.getElementById('adminPage');
         const searchInput = document.getElementById('searchInput');
         const searchBtn = document.getElementById('searchBtn');
-        const membersGrid = document.getElementById('membersGrid');
+        const membersTableBody = document.getElementById('membersTableBody');
         const addEducation = document.getElementById('addEducation');
         const educationContainer = document.getElementById('educationContainer');
         const adminTableBody = document.getElementById('adminTableBody');
@@ -746,12 +990,26 @@
         const closeDetailsModal = document.getElementById('closeDetailsModal');
         const detailsTitle = document.getElementById('detailsTitle');
         const detailsContent = document.getElementById('detailsContent');
+        const profileImage = document.getElementById('profileImage');
+        const imagePreview = document.getElementById('imagePreview');
+        const paymentScreenshot = document.getElementById('paymentScreenshot');
+        const cancelDelete = document.getElementById('cancelDelete');
 
         // এডমিন লগইন তথ্য
         const ADMIN_CREDENTIALS = {
             username: "admin",
             password: "admin123"
         };
+
+        // ইমেইল কনফিগারেশন
+        const EMAIL_CONFIG = {
+            service: 'gmail',
+            from: 'bna.mymdist@gmail.com',
+            subject: 'স্বাস্থ্য কর্মী এসোসিয়েশন - সদস্যতা বাতিলকরণ নোটিফিকেশন'
+        };
+
+        // লোগো লিঙ্ক - আপনি এখানে আপনার ওয়েবসাইটের URL দিন
+        logoLink.href = "https://your-website.com";
 
         // লোকাল স্টোরেজ থেকে ডেটা লোড করুন
         let members = JSON.parse(localStorage.getItem('members')) || [
@@ -762,8 +1020,8 @@
                 motherName: "আয়েশা বেগম",
                 workplace: "ময়মনসিংহ মেডিকেল কলেজ হাসপাতাল",
                 mobile: "01712345678",
-                bnmc: "BNMC-12345",
                 email: "ahmed.hasan@example.com",
+                bnmc: "BNMC-12345",
                 address: "ময়মনসিংহ সদর, ময়মনসিংহ",
                 qualifications: [
                     { degree: "BSC", college: "ময়মনসিংহ মেডিকেল কলেজ", year: "2010" }
@@ -779,8 +1037,8 @@
                 motherName: "রহিমা বেগম",
                 workplace: "কমিউনিটি ক্লিনিক, ময়মনসিংহ",
                 mobile: "01787654321",
-                bnmc: "BNMC-67890",
                 email: "fatema.begum@example.com",
+                bnmc: "BNMC-67890",
                 address: "ত্রিশাল, ময়মনসিংহ",
                 qualifications: [
                     { degree: "BSC", college: "ডিএমসি", year: "2012" }
@@ -793,6 +1051,7 @@
 
         let pendingRegistrations = JSON.parse(localStorage.getItem('pendingRegistrations')) || [];
         let isAdminLoggedIn = localStorage.getItem('isAdminLoggedIn') === 'true';
+        let currentDeleteMember = null;
 
         // এডমিন বাটন ভিজিবিলিটি আপডেট
         function updateAdminButtonVisibility() {
@@ -825,6 +1084,14 @@
             document.body.style.overflow = 'hidden';
         }
 
+        function openDeleteModal(memberId) {
+            currentDeleteMember = members.find(m => m.id === memberId);
+            if (currentDeleteMember) {
+                deleteModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
         // মডাল ক্লোজ ফাংশন
         function closeRegistrationModal() {
             registrationModal.style.display = 'none';
@@ -834,6 +1101,13 @@
         function closeAdminLoginModalFunc() {
             adminLoginModal.style.display = 'none';
             document.body.style.overflow = 'auto';
+        }
+
+        function closeDeleteModalFunc() {
+            deleteModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            currentDeleteMember = null;
+            deleteForm.reset();
         }
 
         function closeDetailsModalFunc() {
@@ -861,7 +1135,7 @@
             homePage.style.display = 'none';
             membersPage.style.display = 'block';
             adminPage.style.display = 'none';
-            renderMembers(members.filter(m => m.status === 'approved'));
+            renderMembersTable(members.filter(m => m.status === 'approved'));
         }
 
         function showAdminPage() {
@@ -876,24 +1150,29 @@
             renderAdminTables();
         }
 
-        // মেম্বার রেন্ডার ফাংশন
-        function renderMembers(membersArray) {
-            membersGrid.innerHTML = '';
+        // মেম্বার টেবিল রেন্ডার ফাংশন
+        function renderMembersTable(membersArray) {
+            membersTableBody.innerHTML = '';
             
             if (membersArray.length === 0) {
-                membersGrid.innerHTML = '<p>কোন মেম্বার পাওয়া যায়নি</p>';
+                membersTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="5" style="text-align: center;">কোন মেম্বার পাওয়া যায়নি</td>
+                    </tr>
+                `;
                 return;
             }
             
             membersArray.forEach(member => {
-                const memberCard = document.createElement('div');
-                memberCard.className = 'member-card';
-                memberCard.innerHTML = `
-                    <div class="member-name">${member.name}</div>
-                    <div class="member-detail"><strong>পিতার নাম:</strong> ${member.fatherName}</div>
-                    <div class="member-detail"><strong>কর্মস্থল:</strong> ${member.workplace}</div>
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${member.name}</td>
+                    <td>${member.fatherName}</td>
+                    <td>${member.workplace}</td>
+                    <td>${member.mobile}</td>
+                    <td>${member.bnmc}</td>
                 `;
-                membersGrid.appendChild(memberCard);
+                membersTableBody.appendChild(row);
             });
         }
 
@@ -934,7 +1213,7 @@
             if (approvedMembers.length === 0) {
                 approvedTableBody.innerHTML = `
                     <tr>
-                        <td colspan="6" style="text-align: center;">কোন এপ্রুভড মেম্বার নেই</td>
+                        <td colspan="7" style="text-align: center;">কোন এপ্রুভড মেম্বার নেই</td>
                     </tr>
                 `;
             } else {
@@ -945,8 +1224,12 @@
                         <td>${member.mobile}</td>
                         <td>${member.bnmc}</td>
                         <td>${member.workplace}</td>
-                        <td class="status-approved">এপ্রুভড</td>
+                        <td>${member.email}</td>
                         <td>${member.approvedDate || 'N/A'}</td>
+                        <td>
+                            <button class="action-btn view-btn" onclick="viewMemberDetails(${member.id})">দেখুন</button>
+                            <button class="action-btn delete-btn" onclick="openDeleteModal(${member.id})">ডিলিট</button>
+                        </td>
                     `;
                     approvedTableBody.appendChild(row);
                 });
@@ -984,6 +1267,38 @@
             }
         }
 
+        // এপ্রুভড মেম্বার বিস্তারিত দেখুন
+        function viewMemberDetails(id) {
+            const member = members.find(m => m.id === id);
+            if (member) {
+                detailsTitle.textContent = 'মেম্বার বিস্তারিত তথ্য';
+                let qualificationsHtml = '';
+                member.qualifications.forEach((qual, index) => {
+                    qualificationsHtml += `
+                        <div class="member-detail">
+                            <strong>শিক্ষাগত যোগ্যতা ${index + 1}:</strong> 
+                            ${qual.degree} - ${qual.college} (${qual.year})
+                        </div>
+                    `;
+                });
+                
+                detailsContent.innerHTML = `
+                    <div class="member-detail"><strong>পূর্ণ নাম:</strong> ${member.name}</div>
+                    <div class="member-detail"><strong>পিতার নাম:</strong> ${member.fatherName}</div>
+                    <div class="member-detail"><strong>মাতার নাম:</strong> ${member.motherName}</div>
+                    <div class="member-detail"><strong>মোবাইল নম্বর:</strong> ${member.mobile}</div>
+                    <div class="member-detail"><strong>ইমেইল:</strong> ${member.email}</div>
+                    <div class="member-detail"><strong>বিএনএমসি নম্বর:</strong> ${member.bnmc}</div>
+                    <div class="member-detail"><strong>ঠিকানা:</strong> ${member.address}</div>
+                    <div class="member-detail"><strong>কর্মস্থল:</strong> ${member.workplace}</div>
+                    ${qualificationsHtml}
+                    <div class="member-detail"><strong>রেজিস্ট্রেশন তারিখ:</strong> ${member.registrationDate}</div>
+                    <div class="member-detail"><strong>এপ্রুভ তারিখ:</strong> ${member.approvedDate}</div>
+                `;
+                detailsModal.style.display = 'block';
+            }
+        }
+
         // রেজিস্ট্রেশন এপ্রুভ ফাংশন
         function approveRegistration(id) {
             const registrationIndex = pendingRegistrations.findIndex(reg => reg.id === id);
@@ -1012,6 +1327,62 @@
                     alert('রেজিস্ট্রেশন রিজেক্ট করা হয়েছে!');
                 }
             }
+        }
+
+        // মেম্বার ডিলিট ফাংশন
+        function deleteMember(reason, sendEmail) {
+            if (!currentDeleteMember) return;
+            
+            const memberIndex = members.findIndex(m => m.id === currentDeleteMember.id);
+            if (memberIndex !== -1) {
+                // ইমেইল নোটিফিকেশন পাঠান
+                if (sendEmail && currentDeleteMember.email) {
+                    sendDeleteNotification(currentDeleteMember.email, currentDeleteMember.name, reason);
+                }
+                
+                members.splice(memberIndex, 1);
+                saveData();
+                renderAdminTables();
+                closeDeleteModalFunc();
+                alert('মেম্বার সফলভাবে ডিলিট করা হয়েছে!');
+            }
+        }
+
+        // ইমেইল নোটিফিকেশন ফাংশন
+        function sendDeleteNotification(toEmail, memberName, reason) {
+            // এটি একটি সিমুলেশন - বাস্তবে আপনাকে সার্ভার-সাইড ইমেইল সার্ভিস ব্যবহার করতে হবে
+            const emailData = {
+                to: toEmail,
+                from: EMAIL_CONFIG.from,
+                subject: EMAIL_CONFIG.subject,
+                html: `
+                    <div style="font-family: 'Hind Siliguri', sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
+                        <h2 style="color: #d32f2f; text-align: center;">স্বাস্থ্য কর্মী এসোসিয়েশন</h2>
+                        <h3 style="color: #333;">প্রিয় ${memberName},</h3>
+                        <p>আমরা আপনাকে জানাতে আন্তরিকভাবে দুঃখিত যে, আমাদের সিস্টেম থেকে আপনার সদস্যতা বাতিল করা হয়েছে।</p>
+                        <div style="background: #ffebee; padding: 15px; border-radius: 5px; margin: 15px 0;">
+                            <h4 style="color: #d32f2f; margin-top: 0;">ডিলিট করার কারণ:</h4>
+                            <p style="margin: 0;">${reason}</p>
+                        </div>
+                        <p>আপনি যদি মনে করেন এটি একটি ভুল সিদ্ধান্ত, অনুগ্রহ করে আমাদের সাথে যোগাযোগ করুন:</p>
+                        <p>ইমেইল: bna.mymdist@gmail.com<br>মোবাইল: ০১৭৫১৪৫৮২৮৮</p>
+                        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center;">
+                            <p style="color: #666; font-size: 14px;">স্বাস্থ্য কর্মী এসোসিয়েশন<br>ময়মনসিংহ</p>
+                        </div>
+                    </div>
+                `
+            };
+            
+            // সিমুলেট ইমেইল সেন্ডিং
+            console.log('ইমেইল পাঠানো হচ্ছে:', emailData);
+            alert(`ইমেইল নোটিফিকেশন ${toEmail} এ পাঠানো হয়েছে`);
+            
+            // বাস্তব ইম্প্লিমেন্টেশনের জন্য:
+            // fetch('/api/send-email', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify(emailData)
+            // })
         }
 
         // এডমিন লগইন ফাংশন
@@ -1049,8 +1420,39 @@
                     member.email.toLowerCase().includes(searchTerm)
                 )
             );
-            renderMembers(filteredMembers);
+            renderMembersTable(filteredMembers);
         }
+
+        // ইমেজ প্রিভিউ ফাংশন
+        profileImage.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                // ফাইল সাইজ চেক (100KB)
+                if (file.size > 100 * 1024) {
+                    alert('ছবির সাইজ 100KB এর কম হতে হবে!');
+                    this.value = '';
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                    
+                    // ইমেজ ডাইমেনশন চেক
+                    const img = new Image();
+                    img.onload = function() {
+                        if (this.width !== 400 || this.height !== 400) {
+                            alert('ছবির ডাইমেনশন 400x400 পিক্সেল হতে হবে!');
+                            profileImage.value = '';
+                            imagePreview.style.display = 'none';
+                        }
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
 
         // এডুকেশন ফিল্ড অ্যাড ফাংশন
         let educationCount = 1;
@@ -1091,6 +1493,17 @@
         registrationForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
+            // ইমেজ ভ্যালিডেশন
+            if (!profileImage.files[0]) {
+                alert('দয়া করে একটি প্রোফাইল ছবি আপলোড করুন!');
+                return;
+            }
+            
+            if (!paymentScreenshot.files[0]) {
+                alert('দয়া করে পেমেন্ট স্ক্রিনশট আপলোড করুন!');
+                return;
+            }
+            
             const formData = new FormData(this);
             const registrationData = {
                 id: Date.now(),
@@ -1102,6 +1515,8 @@
                 bnmc: formData.get('bnmc'),
                 address: formData.get('address'),
                 workplace: formData.get('workplace'),
+                profileImage: formData.get('profileImage').name,
+                paymentScreenshot: formData.get('paymentScreenshot').name,
                 qualifications: [],
                 status: 'pending',
                 registrationDate: new Date().toLocaleDateString('bn-BD')
@@ -1129,6 +1544,7 @@
                 closeRegistrationModal();
                 showSuccessMessage();
                 registrationForm.reset();
+                imagePreview.style.display = 'none';
                 
                 // শিক্ষাগত যোগ্যতা ফিল্ড রিসেট
                 educationContainer.innerHTML = `
@@ -1163,6 +1579,20 @@
             }, 1000);
         });
 
+        // ডিলিট ফর্ম সাবমিট হ্যান্ডলার
+        deleteForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const reason = document.getElementById('deleteReason').value;
+            const sendEmail = document.getElementById('notificationEmail').checked;
+            
+            if (!reason.trim()) {
+                alert('দয়া করে ডিলিট করার কারণ লিখুন!');
+                return;
+            }
+            
+            deleteMember(reason, sendEmail);
+        });
+
         // এডমিন লগইন ফর্ম সাবমিট হ্যান্ডলার
         adminLoginForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1178,9 +1608,11 @@
         adminBtn.addEventListener('click', showAdminPage);
         adminLoginBtn.addEventListener('click', openAdminLoginModal);
         logoutBtn.addEventListener('click', adminLogout);
+        cancelDelete.addEventListener('click', closeDeleteModalFunc);
         
         closeModal.addEventListener('click', closeRegistrationModal);
         closeAdminLoginModal.addEventListener('click', closeAdminLoginModalFunc);
+        closeDeleteModal.addEventListener('click', closeDeleteModalFunc);
         closeDetailsModal.addEventListener('click', closeDetailsModalFunc);
         okBtn.addEventListener('click', hideSuccessMessage);
         searchBtn.addEventListener('click', searchMembers);
@@ -1205,6 +1637,9 @@
             if (e.target === adminLoginModal) {
                 closeAdminLoginModalFunc();
             }
+            if (e.target === deleteModal) {
+                closeDeleteModalFunc();
+            }
         });
 
         // ESC কী প্রেস করলে মডাল ক্লোজ
@@ -1214,6 +1649,7 @@
                 hideSuccessMessage();
                 closeDetailsModalFunc();
                 closeAdminLoginModalFunc();
+                closeDeleteModalFunc();
             }
         });
 
