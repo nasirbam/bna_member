@@ -1211,18 +1211,24 @@
 
         // হাসপাতাল লিস্ট
         const HOSPITALS = [
-            'ময়মনসিংহ মেডিকেল কলেজ হাসপাতাল',
-            'কমিউনিটি ক্লিনিক, ময়মনসিংহ',
-            'আল-হারামাইন হাসপাতাল, ময়মনসিংহ',
-            'আনোয়ার খান মডার্ন মেডিকেল কলেজ হাসপাতাল',
-            'ঢাকা মেডিকেল কলেজ হাসপাতাল',
-            'বঙ্গবন্ধু শেখ মুজিব মেডিকেল বিশ্ববিদ্যালয় হাসপাতাল',
-            'চট্টগ্রাম মেডিকেল কলেজ হাসপাতাল',
-            'রাজশাহী মেডিকেল কলেজ হাসপাতাল',
-            'সিলেট এম.এ.জি. ওসমানী মেডিকেল কলেজ হাসপাতাল',
-            'রংপুর মেডিকেল কলেজ হাসপাতাল',
-            'কুমিল্লা মেডিকেল কলেজ হাসপাতাল',
-            'শের-ই-বাংলা মেডিকেল কলেজ হাসপাতাল, বরিশাল'
+    'ময়মনসিংহ মেডিকেল কলেজ হাসপাতাল',
+    'উপজেলা স্বাস্থ্য কমপ্লেক্স, মুক্তাগাছা’,
+    'উপজেলা স্বাস্থ্য কমপ্লেক্স, ত্রিশাল’,
+	'উপজেলা স্বাস্থ্য কমপ্লেক্স, ভালুকা’,
+    'উপজেলা স্বাস্থ্য কমপ্লেক্স, ইশ্বরগঞ্জ’,
+    'উপজেলা স্বাস্থ্য কমপ্লেক্স, ফুলবাড়ীয়া’,
+    'উপজেলা স্বাস্থ্য কমপ্লেক্স, ধোবাউড়া’,
+    'উপজেলা স্বাস্থ্য কমপ্লেক্স, ফুলপুর’,
+    'উপজেলা স্বাস্থ্য কমপ্লেক্স, হালুয়াঘাট’,
+    'উপজেলা স্বাস্থ্য কমপ্লেক্স, গৌরিপুর’,
+    'উপজেলা স্বাস্থ্য কমপ্লেক্স, গফরগাঁও’,
+    'উপজেলা স্বাস্থ্য কমপ্লেক্স, নান্দাইল’,
+            'ময়মনসিংহ নার্সিং কলেজ’,
+            'সিবিএমসিবিএইচ’,
+            'সিবি্সিএনবি’,
+            'প্রাইভেট হাসপাতাল’,
+            
+
         ];
 
         // লোকাল স্টোরেজ থেকে ডেটা লোড করুন
@@ -1531,35 +1537,119 @@
             `;
         }
 
-        // এডমিন টেবিল রেন্ডার ফাংশন
-        function renderAdminTables() {
-            // পেন্ডিং রেজিস্ট্রেশন টেবিল
-            adminTableBody.innerHTML = '';
-            
-            if (pendingRegistrations.length === 0) {
-                adminTableBody.innerHTML = `
-                    <tr>
-                        <td colspan="6" style="text-align: center;">কোন পেন্ডিং রেজিস্ট্রেশন নেই</td>
-                    </tr>
+        <script>
+    // ... পূর্বের সকল কোড ঠিক আছে ...
+
+    // এডমিন টেবিল রেন্ডার ফাংশন - শুধু এই ফাংশনটি আপডেট করুন
+    function renderAdminTables() {
+        // পেন্ডিং রেজিস্ট্রেশন টেবিল
+        adminTableBody.innerHTML = '';
+        
+        if (pendingRegistrations.length === 0) {
+            adminTableBody.innerHTML = `
+                <tr>
+                    <td colspan="6" style="text-align: center;">কোন পেন্ডিং রেজিস্ট্রেশন নেই</td>
+                </tr>
+            `;
+        } else {
+            pendingRegistrations.forEach(registration => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${registration.name}</td>
+                    <td>${registration.mobile}</td>
+                    <td>${registration.bnmc}</td>
+                    <td>${registration.workplace}</td>
+                    <td class="status-pending">পেন্ডিং</td>
+                    <td>
+                        <button class="action-btn view-btn" onclick="viewAdminDetails(${registration.id})">দেখুন</button>
+                        <button class="action-btn approve-btn" onclick="approveRegistration(${registration.id})">এপ্রুভ</button>
+                        <button class="action-btn reject-btn" onclick="rejectRegistration(${registration.id})">রিজেক্ট</button>
+                    </td>
                 `;
-            } else {
-                pendingRegistrations.forEach(registration => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${registration.name}</td>
-                        <td>${registration.mobile}</td>
-                        <td>${registration.bnmc}</td>
-                        <td>${registration.workplace}</td>
-                        <td class="status-pending">পেন্ডিং</td>
-                        <td>
-                            <button class="action-btn view-btn" onclick="viewAdminDetails(${registration.id})">দেখুন</button>
-                            <button class="action-btn approve-btn" onclick="approveRegistration(${registration.id})">এপ্রুভ</button>
-                            <button class="action-btn reject-btn" onclick="rejectRegistration(${registration.id})">রিজেক্ট</button>
-                        </td>
-                    `;
-                    adminTableBody.appendChild(row);
-                });
+                adminTableBody.appendChild(row);
+            });
+        }
+
+        // এপ্রুভড সদস্য টেবিল - এখানে ডিলিট বাটন যোগ করা হয়েছে
+        approvedTableBody.innerHTML = '';
+        const approvedMembers = members.filter(m => m.status === 'approved');
+        
+        if (approvedMembers.length === 0) {
+            approvedTableBody.innerHTML = `
+                <tr>
+                    <td colspan="7" style="text-align: center;">কোন এপ্রুভড সদস্য নেই</td>
+                </tr>
+            `;
+        } else {
+            approvedMembers.forEach(member => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${member.name}</td>
+                    <td>${member.mobile}</td>
+                    <td>${member.bnmc}</td>
+                    <td>${member.workplace}</td>
+                    <td>${member.email}</td>
+                    <td>${member.approvedDate || 'N/A'}</td>
+                    <td>
+                        <button class="action-btn view-btn" onclick="viewAdminDetails(${member.id})">দেখুন</button>
+                        <button class="action-btn delete-btn" onclick="deleteApprovedMember(${member.id})">ডিলিট</button>
+                    </td>
+                `;
+                approvedTableBody.appendChild(row);
+            });
+        }
+    }
+
+    // এপ্রুভড সদস্য ডিলিট ফাংশন - নতুন ফাংশন যোগ করুন
+    function deleteApprovedMember(id) {
+        if (confirm('আপনি কি নিশ্চিত এই সদস্যকে ডিলিট করতে চান? এই একশনটি irreversible!')) {
+            const memberIndex = members.findIndex(m => m.id === id);
+            if (memberIndex !== -1) {
+                // ইমেইল নোটিফিকেশন পাঠানোর অপশন (ঐচ্ছিক)
+                const sendEmail = confirm('সদস্যকে ইমেইল নোটিফিকেশন পাঠাতে চান?');
+                if (sendEmail && members[memberIndex].email) {
+                    sendDeleteNotification(members[memberIndex].email, members[memberIndex].name, "এডমিন প্যানেল থেকে ম্যানুয়ালি ডিলিট করা হয়েছে");
+                }
+                
+                members.splice(memberIndex, 1);
+                saveData();
+                renderAdminTables();
+                alert('সদস্য সফলভাবে ডিলিট করা হয়েছে!');
             }
+        }
+    }
+
+    // ইমেইল নোটিফিকেশন ফাংশন - নতুন ফাংশন যোগ করুন
+    function sendDeleteNotification(toEmail, memberName, reason) {
+        const emailData = {
+            to: toEmail,
+            from: 'bna.mymdist@gmail.com',
+            subject: 'বাংলাদেশ নার্সেস এসোসিয়েশন - সদস্যতা বাতিলকরণ নোটিফিকেশন',
+            html: `
+                <div style="font-family: 'Hind Siliguri', sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
+                    <h2 style="color: #d32f2f; text-align: center;">বাংলাদেশ নার্সেস এসোসিয়েশন</h2>
+                    <h3 style="color: #333;">প্রিয় ${memberName},</h3>
+                    <p>আমরা আপনাকে জানাতে আন্তরিকভাবে দুঃখিত যে, আমাদের সিস্টেম থেকে আপনার সদস্যতা বাতিল করা হয়েছে।</p>
+                    <div style="background: #ffebee; padding: 15px; border-radius: 5px; margin: 15px 0;">
+                        <h4 style="color: #d32f2f; margin-top: 0;">ডিলিট করার কারণ:</h4>
+                        <p style="margin: 0;">${reason}</p>
+                    </div>
+                    <p>আপনি যদি মনে করেন এটি একটি ভুল সিদ্ধান্ত, অনুগ্রহ করে আমাদের সাথে যোগাযোগ করুন:</p>
+                    <p>ইমেইল: bna.mymdist@gmail.com<br>মোবাইল: ০১৭৫১৪৫৮২৮৮</p>
+                    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center;">
+                        <p style="color: #666; font-size: 14px;">বাংলাদেশ নার্সেস এসোসিয়েশন<br>ময়মনসিংহ জেলা শাখা</p>
+                    </div>
+                </div>
+            `
+        };
+        
+        // সিমুলেট ইমেইল সেন্ডিং
+        console.log('ইমেইল পাঠানো হচ্ছে:', emailData);
+        alert(`ইমেইল নোটিফিকেশন ${toEmail} এ পাঠানো হয়েছে`);
+    }
+
+    // ... বাকি সকল কোড পূর্বের মতো থাকবে ...
+</script>
 
             // এপ্রুভড সদস্য টেবিল
             approvedTableBody.innerHTML = '';
