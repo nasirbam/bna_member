@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>স্বাস্থ্য কর্মী এসোসিয়েশন</title>
+    <link href="https://fonts.maateen.me/hind-siliguri/font.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* হেডার স্টাইল */
+        header {
+            background: linear-gradient(135deg, #1e88e5, #0d47a1);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        .member-btn {
+            background-color: #43a047;
+            color: white;
+        }
+
+        .member-btn:hover {
+            background-color: #2e7d32;
+            transform: translateY(-2px);
+        }
+
+        .members-btn {
+            background-color: #ff9800;
+            color: white;
+        }
+
+        .members-btn:hover {
+            background-color: #ef6c00;
+            transform: translateY(-2px);
+        }
+
+        /* হিরো সেকশন */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: white;
+            margin: 2rem 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #1e88e5;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        /* মডাল স্টাইল */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 2% auto;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideDown 0.3s;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        /* ফর্ম স্টাইল */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #1e88e5;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .education-item {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .add-education {
+            background-color: #e3f2fd;
+            color: #1e88e5;
+            border: 1px dashed #1e88e5;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            display: inline-block;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #43a047, #2e7d32);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* মেম্বারস পেজ */
+        .members-page {
+            display: none;
+            padding: 2rem 0;
+        }
+
+        .search-container {
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-container input {
+            flex: 1;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        .search-btn {
+            background-color: #1e88e5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0 1.5rem;
+            cursor: pointer;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .member-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .member-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .member-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #1e88e5;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-detail {
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+
+        /* সাকসেস মেসেজ */
+        .success-message {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .success-content {
+            background-color: white;
+            margin: 20% auto;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .success-content h3 {
+            color: #43a047;
+            margin-bottom: 1rem;
+        }
+
+        .ok-btn {
+            padding: 0.75rem 2rem;
+            background-color: #1e88e5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        /* রেসপনসিভ ডিজাইন */
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                width: 100%;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .search-container {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- হেডার সেকশন -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">স্বাস্থ্য কর্মী এসোসিয়েশন</div>
+                <div class="nav-buttons">
+                    <button class="btn member-btn" id="memberBtn">সদস্য হোন</button>
+                    <button class="btn members-btn" id="membersBtn">মেম্বার</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- মেইন কন্টেন্ট -->
+    <main class="container">
+        <section class="hero">
+            <h1>স্বাস্থ্য সেবায় নিবেদিত প্রফেশনালদের নেটওয়ার্ক</h1>
+            <p>আমাদের কমিউনিটিতে যোগ দিন এবং পেশাগত উন্নয়নের সুযোগ নিন</p>
+            <button class="btn member-btn" id="ctaMemberBtn">সদস্য হোন</button>
+        </section>
+
+        <!-- মেম্বারস পেজ -->
+        <section class="members-page" id="membersPage">
+            <h2 style="margin-bottom: 1.5rem;">আমাদের সদস্যবৃন্দ</h2>
+            
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="নাম, মোবাইল নম্বর, বিএনএমসি রেজি নম্বর বা ইমেইল দ্বারা খুঁজুন">
+                <button class="search-btn" id="searchBtn">খুঁজুন</button>
+            </div>
+            
+            <div class="members-grid" id="membersGrid">
+                <!-- মেম্বার কার্ডগুলি এখানে লোড হবে -->
+            </div>
+        </section>
+    </main>
+
+    <!-- রেজিস্ট্রেশন মডাল -->
+    <div class="modal" id="registrationModal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2>সদস্য রেজিস্ট্রেশন ফর্ম</h2>
+            <form id="registrationForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fullName">পূর্ণ নাম *</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fatherName">পিতার নাম *</label>
+                        <input type="text" id="fatherName" name="fatherName" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="motherName">মাতার নাম *</label>
+                        <input type="text" id="motherName" name="motherName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile">মোবাইল নম্বর *</label>
+                        <input type="tel" id="mobile" name="mobile" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">ইমেইল এড্রেস</label>
+                        <input type="email" id="email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="bnmc">বিএনএমসি রেজি নম্বর *</label>
+                        <input type="text" id="bnmc" name="bnmc" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">ঠিকানা *</label>
+                    <textarea id="address" name="address" rows="3" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="workplace">কর্মস্থল *</label>
+                    <input type="text" id="workplace" name="workplace" required>
+                </div>
+
+                <div class="form-group">
+                    <label>শিক্ষাগত যোগ্যতা *</label>
+                    <div id="educationContainer">
+                        <div class="education-item">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="qualification0">ডিগ্রী</label>
+                                    <select id="qualification0" name="qualifications[0][degree]" required>
+                                        <option value="">নির্বাচন করুন</option>
+                                        <option value="SSC">এসএসসি</option>
+                                        <option value="HSC">এইচএসসি</option>
+                                        <option value="Diploma">ডিপ্লোমা</option>
+                                        <option value="BSC">বিএসসি</option>
+                                        <option value="MPH">এমপিএইচ</option>
+                                        <option value="PhD">পিএইচডি</option>
+                                        <option value="Others">অন্যান্য</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="college0">কলেজ/ইনস্টিটিউটের নাম</label>
+                                    <input type="text" id="college0" name="qualifications[0][college]" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="year0">পাসের বছর</label>
+                                    <input type="number" id="year0" name="qualifications[0][year]" min="1950" max="2030" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="add-education" id="addEducation">+ আরো যোগ করুন</div>
+                </div>
+
+                <button type="submit" class="submit-btn">রেজিস্টার করুন</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- সাকসেস মেসেজ -->
+    <div class="success-message" id="successMessage">
+        <div class="success-content">
+            <h3>✅ রেজিস্ট্রেশন সফল!</h3>
+            <p>আপনার রেজিস্ট্রেশন সম্পূর্ণ হয়েছে। এডমিন এক্সেপ্ট করলে আপনি মেম্বার হবেন।</p>
+            <button class="ok-btn" id="okBtn">ঠিক আছে</button>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const memberBtn = document.getElementById('memberBtn');
+        const membersBtn = document.getElementById('membersBtn');
+        const ctaMemberBtn = document.getElementById('ctaMemberBtn');
+        const registrationModal = document.getElementById('registrationModal');
+        const closeModal = document.getElementById('closeModal');
+        const registrationForm = document.getElementById('registrationForm');
+        const successMessage = document.getElementById('successMessage');
+        const okBtn = document.getElementById('okBtn');
+        const membersPage = document.getElementById('membersPage');
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const membersGrid = document.getElementById('membersGrid');
+        const addEducation = document.getElementById('addEducation');
+        const educationContainer = document.getElementById('educationContainer');
+
+        // ডেমো মেম্বার ডেটা (এডমিন এক্সেপ্ট করা মেম্বার)
+        let members = [
+            {
+                id: 1,
+                name: "ডাঃ আহমেদ হাসান",
+                fatherName: "মোঃ রফিকুল ইসলাম",
+                workplace: "ময়মনসিংহ মেডিকেল কলেজ হাসপাতাল",
+                mobile: "01712345678",
+                bnmc: "BNMC-12345",
+                email: "ahmed.hasan@example.com",
+                status: "approved"
+            },
+            {
+                id: 2,
+                name: "ডাঃ ফাতেমা বেগম",
+                fatherName: "মোঃ করিম উদ্দিন",
+                workplace: "কমিউনিটি ক্লিনিক, ময়মনসিংহ",
+                mobile: "01787654321",
+                bnmc: "BNMC-67890",
+                email: "fatema.begum@example.com",
+                status: "approved"
+            },
+            {
+                id: 3,
+                name: "ডাঃ রাজীব আহমেদ",
+                fatherName: "মোঃ সিরাজুল ইসলাম",
+                workplace: "আল-হারামাইন হাসপাতাল, ময়মনসিংহ",
+                mobile: "01811223344",
+                bnmc: "BNMC-54321",
+                email: "rajib.ahmed@example.com",
+                status: "approved"
+            }
+        ];
+
+        // পেন্ডিং রেজিস্ট্রেশন (এডমিন এক্সেপ্ট করার জন্য)
+        let pendingRegistrations = [];
+
+        // মডাল ওপেন ফাংশন
+        function openModal() {
+            registrationModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // মডাল ক্লোজ ফাংশন
+        function closeRegistrationModal() {
+            registrationModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // সাকসেস মেসেজ শো ফাংশন
+        function showSuccessMessage() {
+            successMessage.style.display = 'block';
+        }
+
+        // সাকসেস মেসেজ হাইড ফাংশন
+        function hideSuccessMessage() {
+            successMessage.style.display = 'none';
+        }
+
+        // মেম্বারস পেজ শো ফাংশন
+        function showMembersPage() {
+            document.querySelector('.hero').style.display = 'none';
+            membersPage.style.display = 'block';
+            renderMembers(members);
+        }
+
+        // হোম পেজ শো ফাংশন
+        function showHomePage() {
+            document.querySelector('.hero').style.display = 'block';
+            membersPage.style.display = 'none';
+        }
+
+        // মেম্বার রেন্ডার ফাংশন
+        function renderMembers(membersArray) {
+            membersGrid.innerHTML = '';
+            
+            if (membersArray.length === 0) {
+                membersGrid.innerHTML = '<p>কোন মেম্বার পাওয়া যায়নি</p>';
+                return;
+            }
+            
+            membersArray.forEach(member => {
+                if (member.status === 'approved') {
+                    const memberCard = document.createElement('div');
+                    memberCard.className = 'member-card';
+                    memberCard.innerHTML = `
+                        <div class="member-name">${member.name}</div>
+                        <div class="member-detail"><strong>পিতার নাম:</strong> ${member.fatherName}</div>
+                        <div class="member-detail"><strong>কর্মস্থল:</strong> ${member.workplace}</div>
+                    `;
+                    membersGrid.appendChild(memberCard);
+                }
+            });
+        }
+
+        // সার্চ ফাংশন
+        function searchMembers() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filteredMembers = members.filter(member => 
+                member.name.toLowerCase().includes(searchTerm) ||
+                member.mobile.includes(searchTerm) ||
+                member.bnmc.toLowerCase().includes(searchTerm) ||
+                member.email.toLowerCase().includes(searchTerm)
+            );
+            renderMembers(filteredMembers);
+        }
+
+        // এডুকেশন ফিল্ড অ্যাড ফাংশন
+        let educationCount = 1;
+        addEducation.addEventListener('click', function() {
+            const educationItem = document.createElement('div');
+            educationItem.className = 'education-item';
+            educationItem.innerHTML = `
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="qualification${educationCount}">ডিগ্রী</label>
+                        <select id="qualification${educationCount}" name="qualifications[${educationCount}][degree]" required>
+                            <option value="">নির্বাচন করুন</option>
+                            <option value="SSC">এসএসসি</option>
+                            <option value="HSC">এইচএসসি</option>
+                            <option value="Diploma">ডিপ্লোমা</option>
+                            <option value="BSC">বিএসসি</option>
+                            <option value="MPH">এমপিএইচ</option>
+                            <option value="PhD">পিএইচডি</option>
+                            <option value="Others">অন্যান্য</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="college${educationCount}">কলেজ/ইনস্টিটিউটের নাম</label>
+                        <input type="text" id="college${educationCount}" name="qualifications[${educationCount}][college]" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="year${educationCount}">পাসের বছর</label>
+                        <input type="number" id="year${educationCount}" name="qualifications[${educationCount}][year]" min="1950" max="2030" required>
+                    </div>
+                </div>
+            `;
+            educationContainer.appendChild(educationItem);
+            educationCount++;
+        });
+
+        // ফর্ম সাবমিট হ্যান্ডলার
+        registrationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const registrationData = {
+                id: Date.now(),
+                name: formData.get('fullName'),
+                fatherName: formData.get('fatherName'),
+                motherName: formData.get('motherName'),
+                mobile: formData.get('mobile'),
+                email: formData.get('email'),
+                bnmc: formData.get('bnmc'),
+                address: formData.get('address'),
+                workplace: formData.get('workplace'),
+                qualifications: [],
+                status: 'pending',
+                registrationDate: new Date().toLocaleDateString('bn-BD')
+            };
+            
+            // শিক্ষাগত যোগ্যতা সংগ্রহ
+            const degreeElements = document.querySelectorAll('[name^="qualifications"][name$="[degree]"]');
+            const collegeElements = document.querySelectorAll('[name^="qualifications"][name$="[college]"]');
+            const yearElements = document.querySelectorAll('[name^="qualifications"][name$="[year]"]');
+            
+            for (let i = 0; i < degreeElements.length; i++) {
+                registrationData.qualifications.push({
+                    degree: degreeElements[i].value,
+                    college: collegeElements[i].value,
+                    year: yearElements[i].value
+                });
+            }
+            
+            // পেন্ডিং রেজিস্ট্রেশনে যোগ করুন
+            pendingRegistrations.push(registrationData);
+            
+            // সিমুলেট API কল
+            setTimeout(() => {
+                closeRegistrationModal();
+                showSuccessMessage();
+                registrationForm.reset();
+                
+                // শিক্ষাগত যোগ্যতা ফিল্ড রিসেট
+                educationContainer.innerHTML = `
+                    <div class="education-item">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="qualification0">ডিগ্রী</label>
+                                <select id="qualification0" name="qualifications[0][degree]" required>
+                                    <option value="">নির্বাচন করুন</option>
+                                    <option value="SSC">এসএসসি</option>
+                                    <option value="HSC">এইচএসসি</option>
+                                    <option value="Diploma">ডিপ্লোমা</option>
+                                    <option value="BSC">বিএসসি</option>
+                                    <option value="MPH">এমপিএইচ</option>
+                                    <option value="PhD">পিএইচডি</option>
+                                    <option value="Others">অন্যান্য</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="college0">কলেজ/ইনস্টিটিউটের নাম</label>
+                                <input type="text" id="college0" name="qualifications[0][college]" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="year0">পাসের বছর</label>
+                                <input type="number" id="year0" name="qualifications[0][year]" min="1950" max="2030" required>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                educationCount = 1;
+            }, 1000);
+        });
+
+        // ইভেন্ট লিসেনার
+        memberBtn.addEventListener('click', openModal);
+        ctaMemberBtn.addEventListener('click', openModal);
+        membersBtn.addEventListener('click', showMembersPage);
+        
+        closeModal.addEventListener('click', closeRegistrationModal);
+        okBtn.addEventListener('click', hideSuccessMessage);
+        searchBtn.addEventListener('click', searchMembers);
+        
+        searchInput.addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') {
+                searchMembers();
+            }
+        });
+
+        // মডালের বাইরে ক্লিক করলে ক্লোজ
+        window.addEventListener('click', (e) => {
+            if (e.target === registrationModal) {
+                closeRegistrationModal();
+            }
+            if (e.target === successMessage) {
+                hideSuccessMessage();
+            }
+        });
+
+        // ESC কী প্রেস করলে মডাল ক্লোজ
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeRegistrationModal();
+                hideSuccessMessage();
+            }
+        });
+
+        // এডমিন ফাংশন (ডেমো উদ্দেশ্যে)
+        function adminApproveRegistration(registrationId) {
+            const registration = pendingRegistrations.find(reg => reg.id === registrationId);
+            if (registration) {
+                registration.status = 'approved';
+                members.push(registration);
+                pendingRegistrations = pendingRegistrations.filter(reg => reg.id !== registrationId);
+                console.log(`রেজিস্ট্রেশন #${registrationId} এপ্রুভ করা হয়েছে`);
+            }
+        }
+
+        // ডেমো: কিছু রেজিস্ট্রেশন এপ্রুভ করুন
+        setTimeout(() => {
+            if (pendingRegistrations.length > 0) {
+                adminApproveRegistration(pendingRegistrations[0].id);
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
