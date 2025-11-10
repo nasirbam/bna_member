@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>স্বাস্থ্য কর্মী এসোসিয়েশন</title>
     <link href="https://fonts.maateen.me/hind-siliguri/font.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -40,8 +41,16 @@
         }
 
         .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             font-size: 1.8rem;
             font-weight: bold;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: #4caf50;
         }
 
         .nav-buttons {
@@ -77,6 +86,38 @@
         .members-btn:hover {
             background-color: #ef6c00;
             transform: translateY(-2px);
+        }
+
+        .admin-login-btn {
+            background-color: transparent;
+            color: white;
+            border: 1px solid white;
+        }
+
+        .admin-login-btn:hover {
+            background-color: white;
+            color: #1e88e5;
+        }
+
+        .admin-btn {
+            background-color: #d32f2f;
+            color: white;
+            display: none;
+        }
+
+        .admin-btn:hover {
+            background-color: #b71c1c;
+            transform: translateY(-2px);
+        }
+
+        .logout-btn {
+            background-color: #757575;
+            color: white;
+            display: none;
+        }
+
+        .logout-btn:hover {
+            background-color: #616161;
         }
 
         /* হিরো সেকশন */
@@ -191,6 +232,21 @@
             padding: 1rem;
             background-color: #f9f9f9;
             border-radius: 5px;
+            position: relative;
+        }
+
+        .remove-education {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #f44336;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            font-size: 0.8rem;
         }
 
         .add-education {
@@ -225,9 +281,16 @@
         }
 
         /* মেম্বারস পেজ */
-        .members-page {
+        .members-page, .admin-page {
             display: none;
             padding: 2rem 0;
+        }
+
+        .page-title {
+            margin-bottom: 1.5rem;
+            color: #1e88e5;
+            border-bottom: 2px solid #1e88e5;
+            padding-bottom: 0.5rem;
         }
 
         .search-container {
@@ -279,6 +342,93 @@
         .member-detail {
             margin-bottom: 0.5rem;
             color: #555;
+        }
+
+        /* এডমিন টেবিল */
+        .admin-table {
+            width: 100%;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+
+        .admin-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .admin-table th, .admin-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .admin-table th {
+            background-color: #1e88e5;
+            color: white;
+            font-weight: bold;
+        }
+
+        .admin-table tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .action-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-right: 0.5rem;
+        }
+
+        .approve-btn {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .reject-btn {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .view-btn {
+            background-color: #2196f3;
+            color: white;
+        }
+
+        .status-pending {
+            color: #ff9800;
+            font-weight: bold;
+        }
+
+        .status-approved {
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        .status-rejected {
+            color: #f44336;
+            font-weight: bold;
+        }
+
+        /* লগইন ফর্ম */
+        .login-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .login-logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-icon {
+            font-size: 3rem;
+            color: #1e88e5;
+            margin-bottom: 1rem;
         }
 
         /* সাকসেস মেসেজ */
@@ -344,6 +494,10 @@
             .hero h1 {
                 font-size: 2rem;
             }
+            
+            .admin-table {
+                overflow-x: auto;
+            }
         }
     </style>
 </head>
@@ -352,10 +506,16 @@
     <header>
         <div class="container">
             <nav>
-                <div class="logo">স্বাস্থ্য কর্মী এসোসিয়েশন</div>
+                <div class="logo">
+                    <i class="fas fa-hand-holding-medical logo-icon"></i>
+                    <span> বাংলাদেশ নার্সেস এসোসিয়েশন (বিএনএ), ময়মনসিংহ </span>
+                </div>
                 <div class="nav-buttons">
                     <button class="btn member-btn" id="memberBtn">সদস্য হোন</button>
                     <button class="btn members-btn" id="membersBtn">মেম্বার</button>
+                    <button class="btn admin-login-btn" id="adminLoginBtn">এডমিন লগইন</button>
+                    <button class="btn admin-btn" id="adminBtn">এডমিন প্যানেল</button>
+                    <button class="btn logout-btn" id="logoutBtn">লগআউট</button>
                 </div>
             </nav>
         </div>
@@ -363,15 +523,15 @@
 
     <!-- মেইন কন্টেন্ট -->
     <main class="container">
-        <section class="hero">
-            <h1>স্বাস্থ্য সেবায় নিবেদিত প্রফেশনালদের নেটওয়ার্ক</h1>
-            <p>আমাদের কমিউনিটিতে যোগ দিন এবং পেশাগত উন্নয়নের সুযোগ নিন</p>
+        <section class="hero" id="homePage">
+            <h1>বিএনএ ময়মনসিংহ জেলা শাখার সদস্যদের স্বাগতম</h1>
+            <p> নার্সিং পেশার উন্নয়নে আমরা বদ্ধ পরিকর </p>
             <button class="btn member-btn" id="ctaMemberBtn">সদস্য হোন</button>
         </section>
 
         <!-- মেম্বারস পেজ -->
         <section class="members-page" id="membersPage">
-            <h2 style="margin-bottom: 1.5rem;">আমাদের সদস্যবৃন্দ</h2>
+            <h2 class="page-title">আমাদের সদস্যবৃন্দ</h2>
             
             <div class="search-container">
                 <input type="text" id="searchInput" placeholder="নাম, মোবাইল নম্বর, বিএনএমসি রেজি নম্বর বা ইমেইল দ্বারা খুঁজুন">
@@ -380,6 +540,49 @@
             
             <div class="members-grid" id="membersGrid">
                 <!-- মেম্বার কার্ডগুলি এখানে লোড হবে -->
+            </div>
+        </section>
+
+        <!-- এডমিন পেজ -->
+        <section class="admin-page" id="adminPage">
+            <h2 class="page-title">এডমিন প্যানেল - পেন্ডিং রেজিস্ট্রেশন</h2>
+            
+            <div class="admin-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>নাম</th>
+                            <th>মোবাইল</th>
+                            <th>বিএনএমসি নম্বর</th>
+                            <th>কর্মস্থল</th>
+                            <th>স্ট্যাটাস</th>
+                            <th>কার্যক্রম</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminTableBody">
+                        <!-- পেন্ডিং রেজিস্ট্রেশনগুলি এখানে লোড হবে -->
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 class="page-title">এপ্রুভড মেম্বার</h2>
+            
+            <div class="admin-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>নাম</th>
+                            <th>মোবাইল</th>
+                            <th>বিএনএমসি নম্বর</th>
+                            <th>কর্মস্থল</th>
+                            <th>স্ট্যাটাস</th>
+                            <th>এপ্রুভ তারিখ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="approvedTableBody">
+                        <!-- এপ্রুভড মেম্বারগুলি এখানে লোড হবে -->
+                    </tbody>
+                </table>
             </div>
         </section>
     </main>
@@ -437,6 +640,7 @@
                     <label>শিক্ষাগত যোগ্যতা *</label>
                     <div id="educationContainer">
                         <div class="education-item">
+                            <button type="button" class="remove-education" style="display: none;">×</button>
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="qualification0">ডিগ্রী</label>
@@ -470,6 +674,39 @@
         </div>
     </div>
 
+    <!-- এডমিন লগইন মডাল -->
+    <div class="modal" id="adminLoginModal">
+        <div class="modal-content">
+            <span class="close" id="closeAdminLoginModal">&times;</span>
+            <div class="login-logo">
+                <i class="fas fa-lock login-icon"></i>
+                <h2>এডমিন লগইন</h2>
+            </div>
+            <form id="adminLoginForm" class="login-form">
+                <div class="form-group">
+                    <label for="adminUsername">ইউজারনেম</label>
+                    <input type="text" id="adminUsername" name="adminUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="adminPassword">পাসওয়ার্ড</label>
+                    <input type="password" id="adminPassword" name="adminPassword" required>
+                </div>
+                <button type="submit" class="submit-btn">লগইন করুন</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ডিটেইলস ভিউ মডাল -->
+    <div class="modal" id="detailsModal">
+        <div class="modal-content">
+            <span class="close" id="closeDetailsModal">&times;</span>
+            <h2 id="detailsTitle">সদস্য বিস্তারিত তথ্য</h2>
+            <div id="detailsContent">
+                <!-- বিস্তারিত তথ্য এখানে লোড হবে -->
+            </div>
+        </div>
+    </div>
+
     <!-- সাকসেস মেসেজ -->
     <div class="success-message" id="successMessage">
         <div class="success-content">
@@ -483,55 +720,99 @@
         // DOM Elements
         const memberBtn = document.getElementById('memberBtn');
         const membersBtn = document.getElementById('membersBtn');
+        const adminBtn = document.getElementById('adminBtn');
+        const adminLoginBtn = document.getElementById('adminLoginBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
         const ctaMemberBtn = document.getElementById('ctaMemberBtn');
         const registrationModal = document.getElementById('registrationModal');
+        const adminLoginModal = document.getElementById('adminLoginModal');
         const closeModal = document.getElementById('closeModal');
+        const closeAdminLoginModal = document.getElementById('closeAdminLoginModal');
         const registrationForm = document.getElementById('registrationForm');
+        const adminLoginForm = document.getElementById('adminLoginForm');
         const successMessage = document.getElementById('successMessage');
         const okBtn = document.getElementById('okBtn');
+        const homePage = document.getElementById('homePage');
         const membersPage = document.getElementById('membersPage');
+        const adminPage = document.getElementById('adminPage');
         const searchInput = document.getElementById('searchInput');
         const searchBtn = document.getElementById('searchBtn');
         const membersGrid = document.getElementById('membersGrid');
         const addEducation = document.getElementById('addEducation');
         const educationContainer = document.getElementById('educationContainer');
+        const adminTableBody = document.getElementById('adminTableBody');
+        const approvedTableBody = document.getElementById('approvedTableBody');
+        const detailsModal = document.getElementById('detailsModal');
+        const closeDetailsModal = document.getElementById('closeDetailsModal');
+        const detailsTitle = document.getElementById('detailsTitle');
+        const detailsContent = document.getElementById('detailsContent');
 
-        // ডেমো মেম্বার ডেটা (এডমিন এক্সেপ্ট করা মেম্বার)
-        let members = [
+        // এডমিন লগইন তথ্য
+        const ADMIN_CREDENTIALS = {
+            username: "admin",
+            password: "admin123"
+        };
+
+        // লোকাল স্টোরেজ থেকে ডেটা লোড করুন
+        let members = JSON.parse(localStorage.getItem('members')) || [
             {
                 id: 1,
                 name: "ডাঃ আহমেদ হাসান",
                 fatherName: "মোঃ রফিকুল ইসলাম",
+                motherName: "আয়েশা বেগম",
                 workplace: "ময়মনসিংহ মেডিকেল কলেজ হাসপাতাল",
                 mobile: "01712345678",
                 bnmc: "BNMC-12345",
                 email: "ahmed.hasan@example.com",
-                status: "approved"
+                address: "ময়মনসিংহ সদর, ময়মনসিংহ",
+                qualifications: [
+                    { degree: "BSC", college: "ময়মনসিংহ মেডিকেল কলেজ", year: "2010" }
+                ],
+                status: "approved",
+                registrationDate: "২০২৩-০১-১৫",
+                approvedDate: "২০২৩-০১-২০"
             },
             {
                 id: 2,
                 name: "ডাঃ ফাতেমা বেগম",
                 fatherName: "মোঃ করিম উদ্দিন",
+                motherName: "রহিমা বেগম",
                 workplace: "কমিউনিটি ক্লিনিক, ময়মনসিংহ",
                 mobile: "01787654321",
                 bnmc: "BNMC-67890",
                 email: "fatema.begum@example.com",
-                status: "approved"
-            },
-            {
-                id: 3,
-                name: "ডাঃ রাজীব আহমেদ",
-                fatherName: "মোঃ সিরাজুল ইসলাম",
-                workplace: "আল-হারামাইন হাসপাতাল, ময়মনসিংহ",
-                mobile: "01811223344",
-                bnmc: "BNMC-54321",
-                email: "rajib.ahmed@example.com",
-                status: "approved"
+                address: "ত্রিশাল, ময়মনসিংহ",
+                qualifications: [
+                    { degree: "BSC", college: "ডিএমসি", year: "2012" }
+                ],
+                status: "approved",
+                registrationDate: "২০২৩-০২-১০",
+                approvedDate: "২০২৩-০২-১৫"
             }
         ];
 
-        // পেন্ডিং রেজিস্ট্রেশন (এডমিন এক্সেপ্ট করার জন্য)
-        let pendingRegistrations = [];
+        let pendingRegistrations = JSON.parse(localStorage.getItem('pendingRegistrations')) || [];
+        let isAdminLoggedIn = localStorage.getItem('isAdminLoggedIn') === 'true';
+
+        // এডমিন বাটন ভিজিবিলিটি আপডেট
+        function updateAdminButtonVisibility() {
+            if (isAdminLoggedIn) {
+                adminBtn.style.display = 'block';
+                logoutBtn.style.display = 'block';
+                adminLoginBtn.style.display = 'none';
+            } else {
+                adminBtn.style.display = 'none';
+                logoutBtn.style.display = 'none';
+                adminLoginBtn.style.display = 'block';
+            }
+        }
+
+        // ডেটা সেভ ফাংশন
+        function saveData() {
+            localStorage.setItem('members', JSON.stringify(members));
+            localStorage.setItem('pendingRegistrations', JSON.stringify(pendingRegistrations));
+            localStorage.setItem('isAdminLoggedIn', isAdminLoggedIn);
+        }
 
         // মডাল ওপেন ফাংশন
         function openModal() {
@@ -539,10 +820,24 @@
             document.body.style.overflow = 'hidden';
         }
 
+        function openAdminLoginModal() {
+            adminLoginModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
         // মডাল ক্লোজ ফাংশন
         function closeRegistrationModal() {
             registrationModal.style.display = 'none';
             document.body.style.overflow = 'auto';
+        }
+
+        function closeAdminLoginModalFunc() {
+            adminLoginModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function closeDetailsModalFunc() {
+            detailsModal.style.display = 'none';
         }
 
         // সাকসেস মেসেজ শো ফাংশন
@@ -555,17 +850,30 @@
             successMessage.style.display = 'none';
         }
 
-        // মেম্বারস পেজ শো ফাংশন
-        function showMembersPage() {
-            document.querySelector('.hero').style.display = 'none';
-            membersPage.style.display = 'block';
-            renderMembers(members);
+        // পেজ শো ফাংশন
+        function showHomePage() {
+            homePage.style.display = 'block';
+            membersPage.style.display = 'none';
+            adminPage.style.display = 'none';
         }
 
-        // হোম পেজ শো ফাংশন
-        function showHomePage() {
-            document.querySelector('.hero').style.display = 'block';
+        function showMembersPage() {
+            homePage.style.display = 'none';
+            membersPage.style.display = 'block';
+            adminPage.style.display = 'none';
+            renderMembers(members.filter(m => m.status === 'approved'));
+        }
+
+        function showAdminPage() {
+            if (!isAdminLoggedIn) {
+                alert('দুঃখিত, আপনি লগইন করেননি!');
+                openAdminLoginModal();
+                return;
+            }
+            homePage.style.display = 'none';
             membersPage.style.display = 'none';
+            adminPage.style.display = 'block';
+            renderAdminTables();
         }
 
         // মেম্বার রেন্ডার ফাংশন
@@ -578,27 +886,168 @@
             }
             
             membersArray.forEach(member => {
-                if (member.status === 'approved') {
-                    const memberCard = document.createElement('div');
-                    memberCard.className = 'member-card';
-                    memberCard.innerHTML = `
-                        <div class="member-name">${member.name}</div>
-                        <div class="member-detail"><strong>পিতার নাম:</strong> ${member.fatherName}</div>
-                        <div class="member-detail"><strong>কর্মস্থল:</strong> ${member.workplace}</div>
-                    `;
-                    membersGrid.appendChild(memberCard);
-                }
+                const memberCard = document.createElement('div');
+                memberCard.className = 'member-card';
+                memberCard.innerHTML = `
+                    <div class="member-name">${member.name}</div>
+                    <div class="member-detail"><strong>পিতার নাম:</strong> ${member.fatherName}</div>
+                    <div class="member-detail"><strong>কর্মস্থল:</strong> ${member.workplace}</div>
+                `;
+                membersGrid.appendChild(memberCard);
             });
+        }
+
+        // এডমিন টেবিল রেন্ডার ফাংশন
+        function renderAdminTables() {
+            // পেন্ডিং রেজিস্ট্রেশন টেবিল
+            adminTableBody.innerHTML = '';
+            
+            if (pendingRegistrations.length === 0) {
+                adminTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align: center;">কোন পেন্ডিং রেজিস্ট্রেশন নেই</td>
+                    </tr>
+                `;
+            } else {
+                pendingRegistrations.forEach(registration => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${registration.name}</td>
+                        <td>${registration.mobile}</td>
+                        <td>${registration.bnmc}</td>
+                        <td>${registration.workplace}</td>
+                        <td class="status-pending">পেন্ডিং</td>
+                        <td>
+                            <button class="action-btn view-btn" onclick="viewDetails(${registration.id})">দেখুন</button>
+                            <button class="action-btn approve-btn" onclick="approveRegistration(${registration.id})">এপ্রুভ</button>
+                            <button class="action-btn reject-btn" onclick="rejectRegistration(${registration.id})">রিজেক্ট</button>
+                        </td>
+                    `;
+                    adminTableBody.appendChild(row);
+                });
+            }
+
+            // এপ্রুভড মেম্বার টেবিল
+            approvedTableBody.innerHTML = '';
+            const approvedMembers = members.filter(m => m.status === 'approved');
+            
+            if (approvedMembers.length === 0) {
+                approvedTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align: center;">কোন এপ্রুভড মেম্বার নেই</td>
+                    </tr>
+                `;
+            } else {
+                approvedMembers.forEach(member => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${member.name}</td>
+                        <td>${member.mobile}</td>
+                        <td>${member.bnmc}</td>
+                        <td>${member.workplace}</td>
+                        <td class="status-approved">এপ্রুভড</td>
+                        <td>${member.approvedDate || 'N/A'}</td>
+                    `;
+                    approvedTableBody.appendChild(row);
+                });
+            }
+        }
+
+        // বিস্তারিত দেখুন ফাংশন
+        function viewDetails(id) {
+            const registration = pendingRegistrations.find(reg => reg.id === id);
+            if (registration) {
+                detailsTitle.textContent = 'রেজিস্ট্রেশন বিস্তারিত তথ্য';
+                let qualificationsHtml = '';
+                registration.qualifications.forEach((qual, index) => {
+                    qualificationsHtml += `
+                        <div class="member-detail">
+                            <strong>শিক্ষাগত যোগ্যতা ${index + 1}:</strong> 
+                            ${qual.degree} - ${qual.college} (${qual.year})
+                        </div>
+                    `;
+                });
+                
+                detailsContent.innerHTML = `
+                    <div class="member-detail"><strong>পূর্ণ নাম:</strong> ${registration.name}</div>
+                    <div class="member-detail"><strong>পিতার নাম:</strong> ${registration.fatherName}</div>
+                    <div class="member-detail"><strong>মাতার নাম:</strong> ${registration.motherName}</div>
+                    <div class="member-detail"><strong>মোবাইল নম্বর:</strong> ${registration.mobile}</div>
+                    <div class="member-detail"><strong>ইমেইল:</strong> ${registration.email || 'N/A'}</div>
+                    <div class="member-detail"><strong>বিএনএমসি নম্বর:</strong> ${registration.bnmc}</div>
+                    <div class="member-detail"><strong>ঠিকানা:</strong> ${registration.address}</div>
+                    <div class="member-detail"><strong>কর্মস্থল:</strong> ${registration.workplace}</div>
+                    ${qualificationsHtml}
+                    <div class="member-detail"><strong>রেজিস্ট্রেশন তারিখ:</strong> ${registration.registrationDate}</div>
+                `;
+                detailsModal.style.display = 'block';
+            }
+        }
+
+        // রেজিস্ট্রেশন এপ্রুভ ফাংশন
+        function approveRegistration(id) {
+            const registrationIndex = pendingRegistrations.findIndex(reg => reg.id === id);
+            if (registrationIndex !== -1) {
+                const registration = pendingRegistrations[registrationIndex];
+                registration.status = 'approved';
+                registration.approvedDate = new Date().toLocaleDateString('bn-BD');
+                
+                members.push(registration);
+                pendingRegistrations.splice(registrationIndex, 1);
+                
+                saveData();
+                renderAdminTables();
+                alert('রেজিস্ট্রেশন সফলভাবে এপ্রুভ করা হয়েছে!');
+            }
+        }
+
+        // রেজিস্ট্রেশন রিজেক্ট ফাংশন
+        function rejectRegistration(id) {
+            if (confirm('আপনি কি নিশ্চিত এই রেজিস্ট্রেশনটি রিজেক্ট করতে চান?')) {
+                const registrationIndex = pendingRegistrations.findIndex(reg => reg.id === id);
+                if (registrationIndex !== -1) {
+                    pendingRegistrations.splice(registrationIndex, 1);
+                    saveData();
+                    renderAdminTables();
+                    alert('রেজিস্ট্রেশন রিজেক্ট করা হয়েছে!');
+                }
+            }
+        }
+
+        // এডমিন লগইন ফাংশন
+        function adminLogin(username, password) {
+            if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+                isAdminLoggedIn = true;
+                saveData();
+                updateAdminButtonVisibility();
+                closeAdminLoginModalFunc();
+                alert('সফলভাবে লগইন হয়েছে!');
+                return true;
+            } else {
+                alert('ভুল ইউজারনেম বা পাসওয়ার্ড!');
+                return false;
+            }
+        }
+
+        // লগআউট ফাংশন
+        function adminLogout() {
+            isAdminLoggedIn = false;
+            saveData();
+            updateAdminButtonVisibility();
+            showHomePage();
+            alert('সফলভাবে লগআউট হয়েছে!');
         }
 
         // সার্চ ফাংশন
         function searchMembers() {
             const searchTerm = searchInput.value.toLowerCase();
             const filteredMembers = members.filter(member => 
-                member.name.toLowerCase().includes(searchTerm) ||
-                member.mobile.includes(searchTerm) ||
-                member.bnmc.toLowerCase().includes(searchTerm) ||
-                member.email.toLowerCase().includes(searchTerm)
+                member.status === 'approved' && (
+                    member.name.toLowerCase().includes(searchTerm) ||
+                    member.mobile.includes(searchTerm) ||
+                    member.bnmc.toLowerCase().includes(searchTerm) ||
+                    member.email.toLowerCase().includes(searchTerm)
+                )
             );
             renderMembers(filteredMembers);
         }
@@ -609,6 +1058,7 @@
             const educationItem = document.createElement('div');
             educationItem.className = 'education-item';
             educationItem.innerHTML = `
+                <button type="button" class="remove-education" onclick="this.parentElement.remove()">×</button>
                 <div class="form-row">
                     <div class="form-group">
                         <label for="qualification${educationCount}">ডিগ্রী</label>
@@ -672,6 +1122,7 @@
             
             // পেন্ডিং রেজিস্ট্রেশনে যোগ করুন
             pendingRegistrations.push(registrationData);
+            saveData();
             
             // সিমুলেট API কল
             setTimeout(() => {
@@ -682,6 +1133,7 @@
                 // শিক্ষাগত যোগ্যতা ফিল্ড রিসেট
                 educationContainer.innerHTML = `
                     <div class="education-item">
+                        <button type="button" class="remove-education" style="display: none;">×</button>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="qualification0">ডিগ্রী</label>
@@ -711,12 +1163,25 @@
             }, 1000);
         });
 
+        // এডমিন লগইন ফর্ম সাবমিট হ্যান্ডলার
+        adminLoginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            adminLogin(username, password);
+        });
+
         // ইভেন্ট লিসেনার
         memberBtn.addEventListener('click', openModal);
         ctaMemberBtn.addEventListener('click', openModal);
         membersBtn.addEventListener('click', showMembersPage);
+        adminBtn.addEventListener('click', showAdminPage);
+        adminLoginBtn.addEventListener('click', openAdminLoginModal);
+        logoutBtn.addEventListener('click', adminLogout);
         
         closeModal.addEventListener('click', closeRegistrationModal);
+        closeAdminLoginModal.addEventListener('click', closeAdminLoginModalFunc);
+        closeDetailsModal.addEventListener('click', closeDetailsModalFunc);
         okBtn.addEventListener('click', hideSuccessMessage);
         searchBtn.addEventListener('click', searchMembers);
         
@@ -734,6 +1199,12 @@
             if (e.target === successMessage) {
                 hideSuccessMessage();
             }
+            if (e.target === detailsModal) {
+                closeDetailsModalFunc();
+            }
+            if (e.target === adminLoginModal) {
+                closeAdminLoginModalFunc();
+            }
         });
 
         // ESC কী প্রেস করলে মডাল ক্লোজ
@@ -741,26 +1212,14 @@
             if (e.key === 'Escape') {
                 closeRegistrationModal();
                 hideSuccessMessage();
+                closeDetailsModalFunc();
+                closeAdminLoginModalFunc();
             }
         });
 
-        // এডমিন ফাংশন (ডেমো উদ্দেশ্যে)
-        function adminApproveRegistration(registrationId) {
-            const registration = pendingRegistrations.find(reg => reg.id === registrationId);
-            if (registration) {
-                registration.status = 'approved';
-                members.push(registration);
-                pendingRegistrations = pendingRegistrations.filter(reg => reg.id !== registrationId);
-                console.log(`রেজিস্ট্রেশন #${registrationId} এপ্রুভ করা হয়েছে`);
-            }
-        }
-
-        // ডেমো: কিছু রেজিস্ট্রেশন এপ্রুভ করুন
-        setTimeout(() => {
-            if (pendingRegistrations.length > 0) {
-                adminApproveRegistration(pendingRegistrations[0].id);
-            }
-        }, 5000);
+        // প্রথম লোডে হোম পেজ শো করুন এবং এডমিন বাটন ভিজিবিলিটি আপডেট করুন
+        showHomePage();
+        updateAdminButtonVisibility();
     </script>
 </body>
 </html>
